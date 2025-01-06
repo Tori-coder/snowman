@@ -64,6 +64,24 @@ def play_game():
 
 def start_game(words):
     currentword = random.choice(words)
-    print(currentword)
+    print("Let's play!\n")
+    currentguess = "-" * len(currentword)
+    print(currentguess)
+    print("\n")
+    guess = input("Please choose a letter\n")
+
+    # check guess
+    if guess in currentword:
+        print("Well done!\n")
+
+        #  Updates word revealing correct letters
+        for i in range(len(currentword)):
+            if guess == currentword[i]:
+                currentguess = currentguess[:i] + guess + currentguess[i+1:]
+                print(currentguess)
+    
+    else:
+        print("Sorry, wrong letter\n")
+     
 
 menu()
