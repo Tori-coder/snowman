@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import random
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -13,6 +14,11 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('snowman')
 
 scores = SHEET.worksheet('scores')
+easywords = SHEET.worksheet("easy")
+modwords = SHEET.worksheet("moderate")
+hardwords = SHEET.worksheet("hard")
+
+
 
 # Main Game
 
@@ -45,12 +51,23 @@ def play_game():
     while True:
         menu_option = input("Choose difficulty level: ")
         if menu_option == "1":
-            print("easy")
+            words = easywords.get_all_values() 
+            start_game(words)
+            break 
         elif menu_option == "2":
-            print("moderate")
+            words = modwords.get_all_values()
+            start_game(words)
+            break 
         elif menu_option == "3":
-            print("difficult")
+            words = hardwords.get_all_values() 
+            start_game(words)
+            break   
         else:
             print("Please choose 1,2 or 3")
+
+
+def start_game(words):
+    currentword = random.choice(words)
+    print(currentword)
 
 menu()
