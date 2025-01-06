@@ -66,29 +66,38 @@ def start_game(words):
     currentword = random.choice(words)
     print("Let's play!\n")
     currentguess = "-" * len(currentword)
+    attempts = len(currentword) + 1
     print(currentguess)
 
-
-    while "-" in currentguess:
+    # Loop until the word is guessed or attempts run out:
+    while "-" in currentguess and attempts > 0:  
         guess = input("Please choose a letter\n")
+
+        # Check input validity
+        if len(guess) != 1 or not guess.isalpha():
+            print("Please enter a single valid letter.\n")
+            # Restart the loop for valid input
+            continue  
 
         # check guess
         if guess in currentword:
             print("Well done!\n")
 
-            #  Updates word revealing correct letters
+            # Update word revealing correct letters
             for i in range(len(currentword)):
                 if guess == currentword[i]:
                     currentguess = currentguess[:i] + guess + currentguess[i+1:]
                     print(currentguess)
-    
         else:
             print("Sorry, wrong letter\n")
-    print(f"Game over. You lost/won") 
+
+    print(f"Game over. You lost/won. \n") 
     again = input("Play again? Y or N: ")
     if again == "Y":
         play_game()
-    else: 
+    elif again == "N":
         print("Thanks for playing!")
+    else: 
+        print("Please enter Y or N: ")
 
 menu()
