@@ -39,7 +39,7 @@ def instructions():
 
 
 def play_game():
-    print("\n Difficulty level\n")
+    print("\nDifficulty level\n")
     print("1 Easy\n")
     print("2 Moderate\n")
     print("3 Hard\n")
@@ -67,21 +67,28 @@ def start_game(words):
     print("Let's play!\n")
     currentguess = "-" * len(currentword)
     print(currentguess)
-    print("\n")
-    guess = input("Please choose a letter\n")
 
-    # check guess
-    if guess in currentword:
-        print("Well done!\n")
 
-        #  Updates word revealing correct letters
-        for i in range(len(currentword)):
-            if guess == currentword[i]:
-                currentguess = currentguess[:i] + guess + currentguess[i+1:]
-                print(currentguess)
+    while "-" in currentguess:
+        guess = input("Please choose a letter\n")
+
+        # check guess
+        if guess in currentword:
+            print("Well done!\n")
+
+            #  Updates word revealing correct letters
+            for i in range(len(currentword)):
+                if guess == currentword[i]:
+                    currentguess = currentguess[:i] + guess + currentguess[i+1:]
+                    print(currentguess)
     
-    else:
-        print("Sorry, wrong letter\n")
-     
+        else:
+            print("Sorry, wrong letter\n")
+    print(f"Game over. You lost/won") 
+    again = input("Play again? Y or N: ")
+    if again == "Y":
+        play_game()
+    else: 
+        print("Thanks for playing!")
 
 menu()
