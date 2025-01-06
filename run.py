@@ -18,8 +18,6 @@ easywords = SHEET.worksheet("easy")
 modwords = SHEET.worksheet("moderate")
 hardwords = SHEET.worksheet("hard")
 
-
-
 # Main Game
 
 def menu():
@@ -35,8 +33,6 @@ def menu():
             return play_game()
         else:
             print("Please choose 1 or 2")
-       
-
 
 def instructions():
     print("instructions here")
@@ -51,15 +47,15 @@ def play_game():
     while True:
         menu_option = input("Choose difficulty level: ")
         if menu_option == "1":
-            words = easywords.get_all_values() 
+            words = [item for sublist in easywords.get_all_values() for item in sublist] 
             start_game(words)
             break 
         elif menu_option == "2":
-            words = modwords.get_all_values()
+            words = [item for sublist in modwords.get_all_values() for item in sublist]
             start_game(words)
             break 
         elif menu_option == "3":
-            words = hardwords.get_all_values() 
+            words = [item for sublist in hardwords.get_all_values() for item in sublist]
             start_game(words)
             break   
         else:
