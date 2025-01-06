@@ -66,7 +66,7 @@ def start_game(words):
     currentword = random.choice(words)
     print("Let's play!\n")
     currentguess = "-" * len(currentword)
-    attempts = len(currentword) + 1
+    attempts = 6
     print(currentguess)
 
     # Loop until the word is guessed or attempts run out:
@@ -90,8 +90,11 @@ def start_game(words):
                     print(currentguess)
         else:
             print("Sorry, wrong letter\n")
+            attempts -=1
 
-    print(f"Game over. You lost/won. \n") 
+    print(f"Game over. You lost/won. \n")
+    #need to come back and sort this out later when done the won/lost
+    score += 1 
     again = input("Play again? Y or N: ")
     if again == "Y":
         play_game()
