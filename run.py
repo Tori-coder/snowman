@@ -20,6 +20,41 @@ hardwords = SHEET.worksheet("hard")
 
 # Main Game
 
+def snowman(incorrect):
+    if incorrect==0:
+        print("~~~~~~~~~~~~~~~~")
+    elif incorrect==1:
+        print("    (   *  )    ")
+        print("~~~~~~~~~~~~~~~~")
+    elif incorrect==2:
+        print("     (  * )     ")
+        print("    (   *  )    ")
+        print("~~~~~~~~~~~~~~~~")
+    elif incorrect==3:
+        print("      (  )      ")
+        print("     (  * )     ")
+        print("    (   *  )    ")
+        print("~~~~~~~~~~~~~~~~")
+    elif incorrect==4:
+        print("      (  )      ")
+        print("   --(  * )--   ")
+        print("    (   *  )    ")
+        print("~~~~~~~~~~~~~~~~")
+    elif incorrect==5:
+        print("       __       ")
+        print("     _|__|_     ")
+        print("      (  )      ")
+        print("   --(  * )--   ")
+        print("    (   *  )    ")
+        print("~~~~~~~~~~~~~~~~")
+    elif incorrect==6:
+        print("       __       ")
+        print("     _|__|_     ")
+        print("      (*-)      ")
+        print("   --(  * )--   ")
+        print("    (   *  )    ")
+        print("~~~~~~~~~~~~~~~~")
+
 def menu():
     print("Main Menu:\n")
     print("1 Instructions\n")
@@ -64,14 +99,15 @@ def play_game():
 
 def start_game(words):
     currentword = random.choice(words)
-    print("Let's play!\n")
+    print("\nLet's play!\n")
     currentguess = "-" * len(currentword)
+    incorrect = 0
     attempts = 6
     print(currentguess)
 
     # Loop until the word is guessed or attempts run out:
     while "-" in currentguess and attempts > 0:  
-        guess = input("Please choose a letter\n")
+        guess = input("\nPlease choose a letter\n")
 
         # Check input validity
         if len(guess) != 1 or not guess.isalpha():
@@ -87,14 +123,17 @@ def start_game(words):
             for i in range(len(currentword)):
                 if guess == currentword[i]:
                     currentguess = currentguess[:i] + guess + currentguess[i+1:]
-                    print(currentguess)
+                    print(f"{currentguess}\n")
         else:
             print("Sorry, wrong letter\n")
+            incorrect += 1
             attempts -=1
+        snowman(incorrect)
+
 
     print(f"Game over. You lost/won. \n")
     #need to come back and sort this out later when done the won/lost
-    score += 1 
+
     again = input("Play again? Y or N: ")
     if again == "Y":
         play_game()
