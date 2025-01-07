@@ -13,12 +13,21 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('snowman')
 
-scores = SHEET.worksheet('scores')
+scores = SHEET.worksheet("scores")
 easywords = SHEET.worksheet("easy")
 modwords = SHEET.worksheet("moderate")
 hardwords = SHEET.worksheet("hard")
 
 # Main Game
+
+def getscores():
+    getscores = scores.get_all_values()
+    allscores = getscores[1:]
+    scores_list=(allscores[0])
+
+def update_scores():
+    print()
+
 
 def snowman(incorrect):
     if incorrect==0:
@@ -61,11 +70,11 @@ def menu():
     print("2 Play Game\n")
 
     while True:
-        menu_option = input("Choose from menu: ")
+        menu_option = input("Choose from menu: \n")
         if menu_option == "1":
             return instructions()
         elif menu_option == "2":
-            return play_game()
+            return choose_hard()
         else:
             print("Please choose 1 or 2")
 
@@ -73,14 +82,14 @@ def instructions():
     print("instructions here")
 
 
-def play_game():
+def choose_hard():
     print("\nDifficulty level\n")
     print("1 Easy\n")
     print("2 Moderate\n")
     print("3 Hard\n")
 
     while True:
-        menu_option = input("Choose difficulty level: ")
+        menu_option = input("Choose difficulty level: \n")
         if menu_option == "1":
             words = [item for sublist in easywords.get_all_values() for item in sublist] 
             start_game(words)
@@ -134,12 +143,16 @@ def start_game(words):
     print(f"Game over. You lost/won. \n")
     #need to come back and sort this out later when done the won/lost
 
-    again = input("Play again? Y or N: ")
-    if again == "Y":
-        play_game()
-    elif again == "N":
+    again = input("Play again? Y or N: \n")
+    if again.upper() == "Y":
+        choose_hard()
+    elif again.upper() == "N":
         print("Thanks for playing!")
     else: 
         print("Please enter Y or N: ")
 
-menu()
+def main():
+    getscores()
+    menu()
+
+main()
