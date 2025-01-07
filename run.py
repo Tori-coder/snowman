@@ -24,9 +24,14 @@ def getscores():
     getscores = scores.get_all_values()
     allscores = getscores[1:]
     scores_list=(allscores[0])
+    #Currentscore, PersonalHighScore, and Current(overall)HS from google sheet
+    cus = scores_list[0]
+    phs = scores_list[1]
+    chs = scores_list[2]
 
-def update_scores():
-    print()
+#def update_scores():
+    #scores.update('A2', [[cus, phs, chs]])
+    
 
 
 def snowman(incorrect):
@@ -65,6 +70,7 @@ def snowman(incorrect):
         print("~~~~~~~~~~~~~~~~")
 
 def menu():
+    score=0
     print("Main Menu:\n")
     print("1 Instructions\n")
     print("2 Play Game\n")
@@ -139,8 +145,15 @@ def start_game(words):
             attempts -=1
         snowman(incorrect)
 
+    if "-" in currentguess:
+        result = "lost"
+    else:
+        result = "won"
+        #score +=1
 
-    print(f"Game over. You lost/won. \n")
+    #update_scores()
+
+    print(f"Game over. You {result}. \n")
     #need to come back and sort this out later when done the won/lost
 
     again = input("Play again? Y or N: \n")
